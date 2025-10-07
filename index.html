@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 1 - AI Engineering Bootcamp</title>
+    
+    <!-- PDF Export Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" 
+            integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" 
+            crossorigin="anonymous" 
+            referrerpolicy="no-referrer"
+            onload="console.log('✅ html2pdf library loaded successfully')"
+            onerror="console.error('❌ Failed to load html2pdf library')"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-sidebar: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --ai-engineer-color: #3b82f6;
+            --sdlc-color: #10b981;
+            --sidebar-width: 280px;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-sidebar: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border-color: #334155;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--bg-sidebar);
+            border-right: 1px solid var(--border-color);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+
+        .sidebar-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sidebar-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .sidebar-subtitle {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .nav-day {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-day-button {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: transparent;
+            border: none;
+            text-align: left;
+            cursor: pointer;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-day-button:hover {
+            background: var(--bg-secondary);
+        }
+
+        .nav-day-button.active {
+            background: var(--accent);
+            color: white;
+        }
+
+        .nav-pages {
+            padding-left: 1.5rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .nav-pages.expanded {
+            display: block;
+        }
+
+        .nav-page {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            border-radius: 0.375rem;
+            margin-bottom: 0.25rem;
+            transition: all 0.2s;
+        }
+
+        .nav-page:hover {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .nav-page.active {
+            background: var(--bg-secondary);
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            padding: 2rem 3rem;
+            max-width: 900px;
+        }
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .toolbar-left {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .toolbar-right {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-color);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn:hover {
+            background: var(--bg-secondary);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+        }
+
+        .content-header {
+            margin-bottom: 2rem;
+        }
+
+        .breadcrumb {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .content-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .content-meta {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .content-body {
+            margin-top: 2rem;
+        }
+
+        .content-body h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin: 2rem 0 1rem;
+            color: var(--text-primary);
+        }
+
+        .content-body h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .content-body h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 1rem 0 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .content-body p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.75;
+        }
+
+        .content-body ul, .content-body ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .content-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        .content-body strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .code-block {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .code-block code {
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.875rem;
+            color: var(--text-primary);
+            white-space: pre-wrap;
+        }
+
+        .info-box {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid var(--accent);
+            margin: 1.5rem 0;
+        }
+
+        .info-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .page-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .nav-arrow {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .nav-arrow:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .nav-arrow.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: var(--bg-secondary);
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        th {
+            background: var(--accent);
+            color: white;
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .checkmark {
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+        }
+
+        .error {
+            background: #fee;
+            border: 1px solid #fcc;
+            color: #c33;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+
+        /* Highlighted terms */
+        .highlight-ai-engineer {
+            color: var(--ai-engineer-color);
+            font-weight: 700;
+        }
+
+        .highlight-sdlc {
+            color: var(--sdlc-color);
+            font-weight: 700;
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 1000;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .mobile-menu-toggle:active {
+            transform: scale(0.95);
+        }
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 998;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .sidebar {
+                width: 280px;
+                position: fixed;
+                left: -280px;
+                top: 0;
+                height: 100vh;
+                border-right: 1px solid var(--border-color);
+                border-bottom: none;
+                transition: left 0.3s ease;
+                z-index: 999;
+                box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+            }
+
+            .sidebar.open {
+                left: 0;
+            }
+
+            .sidebar-overlay.active {
+                display: block;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 1rem;
+                padding-top: 4rem;
+            }
+
+            .toolbar {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: stretch;
+            }
+
+            .toolbar-left,
+            .toolbar-right {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .toolbar-right {
+                flex-wrap: wrap;
+            }
+
+            .btn {
+                flex: 1;
+                justify-content: center;
+            }
+
+            .content-title {
+                font-size: 1.5rem;
+                line-height: 1.3;
+            }
+
+            .content-body h2 {
+                font-size: 1.375rem;
+            }
+
+            .content-body h3 {
+                font-size: 1.125rem;
+            }
+
+            .breadcrumb {
+                font-size: 0.75rem;
+            }
+
+            .content-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .page-navigation {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .nav-arrow {
+                width: 100%;
+                justify-content: center;
+            }
+
+            table {
+                font-size: 0.875rem;
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+
+            th, td {
+                padding: 0.5rem;
+            }
+
+            .code-block {
+                font-size: 0.75rem;
+            }
+
+            .code-block code {
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 0.75rem;
+                padding-top: 4rem;
+            }
+
+            .content-title {
+                font-size: 1.25rem;
+            }
+
+            .content-body h2 {
+                font-size: 1.125rem;
+            }
+
+            .content-body h3 {
+                font-size: 1rem;
+            }
+
+            .sidebar-title {
+                font-size: 1.1rem;
+            }
+
+            .nav-day-button {
+                font-size: 0.85rem;
+                padding: 0.6rem 0.85rem;
+            }
+
+            .nav-page {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.85rem;
+            }
+
+            .btn {
+                padding: 0.6rem 0.85rem;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+        <span style="font-size: 1.5rem;">☰</span>
+    </button>
+    
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-title">AI Engineering Bootcamp</div>
+                <div class="sidebar-subtitle">Week 1 Curriculum</div>
+            </div>
+
+            <nav class="nav-section" id="navigation">
+                <div class="loading">Loading curriculum...</div>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="toolbar">
+                <div class="toolbar-left">
+                    <span style="font-weight: 600; color: var(--text-secondary);">Week 1</span>
+                </div>
+                <div class="toolbar-right">
+                    <button class="btn" id="themeToggle">
+                        <span id="themeIcon">🌙</span>
+                        <span id="themeText">Dark</span>
+                    </button>
+                    <button class="btn btn-primary" id="exportBtn">
+                        <span>📄</span>
+                        Export PDF
+                    </button>
+                </div>
+            </div>
+
+            <div id="contentArea">
+                <div class="loading">Loading content...</div>
+            </div>
+
+            <div class="page-navigation">
+                <button class="nav-arrow disabled" id="prevPage">
+                    <span>←</span>
+                    <span>Previous</span>
+                </button>
+                <button class="nav-arrow" id="nextPage">
+                    <span>Next</span>
+                    <span>→</span>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Configuration - Update these paths to your JSON files
+        const INDEX_FILE = 'curriculum-index.json';
+        const DAY_FILES_PATH = './'; // Path to day JSON files
+
+        // State Management
+        let curriculumIndex = null;
+        let dayData = {};
+        let currentDay = 'day1';
+        let currentPage = 0;
+        let isDarkMode = false;
+
+        // Initialize App
+        async function init() {
+            try {
+                await loadCurriculumIndex();
+                await loadDayData(currentDay);
+                renderNavigation();
+                loadPage(currentDay, currentPage);
+                setupEventListeners();
+            } catch (error) {
+                showError('Failed to load curriculum: ' + error.message);
+            }
+        }
+
+        // Load Curriculum Index
+        async function loadCurriculumIndex() {
+            try {
+                const response = await fetch(INDEX_FILE);
+                if (!response.ok) throw new Error('Index file not found');
+                curriculumIndex = await response.json();
+            } catch (error) {
+                console.error('Error loading index:', error);
+                throw error;
+            }
+        }
+
+        // Load Day Data
+        async function loadDayData(dayId) {
+            if (dayData[dayId]) return; // Already loaded
+
+            try {
+                const dayInfo = curriculumIndex.days.find(d => d.id === dayId);
+                if (!dayInfo) throw new Error(`Day ${dayId} not found in index`);
+
+                const response = await fetch(DAY_FILES_PATH + dayInfo.file);
+                if (!response.ok) throw new Error(`Failed to load ${dayInfo.file}`);
+                
+                dayData[dayId] = await response.json();
+            } catch (error) {
+                console.error(`Error loading day ${dayId}:`, error);
+                throw error;
+            }
+        }
+
+        // Show Error Message
+        function showError(message) {
+            const contentArea = document.getElementById('contentArea');
+            contentArea.innerHTML = `
+                <div class="error">
+                    <h3>Error</h3>
+                    <p>${message}</p>
+                    <p>Please ensure all JSON files are in the correct location.</p>
+                </div>
+            `;
+        }
+
+        // Render Navigation
+        function renderNavigation() {
+            const nav = document.getElementById('navigation');
+            let navHTML = '';
+
+            curriculumIndex.days.forEach((dayInfo, dayIndex) => {
+                const dayNum = dayIndex + 1;
+                const dayId = dayInfo.id;
+                
+                navHTML += `
+                    <div class="nav-day">
+                        <button class="nav-day-button" data-day="${dayId}" onclick="toggleDay('${dayId}')">
+                            <span>Day ${dayNum}: ${dayInfo.title}</span>
+                            <span>▼</span>
+                        </button>
+                        <div class="nav-pages" id="pages-${dayId}">
+                            <div class="loading" style="padding: 0.5rem; font-size: 0.8rem;">Loading...</div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            nav.innerHTML = navHTML;
+            
+            // Load and render pages for current day
+            renderDayPages(currentDay);
+            
+            // Expand current day
+            document.querySelector(`[data-day="${currentDay}"]`).classList.add('active');
+            document.getElementById(`pages-${currentDay}`).classList.add('expanded');
+        }
+
+        // Render Day Pages in Navigation
+        async function renderDayPages(dayId) {
+            await loadDayData(dayId);
+            const day = dayData[dayId];
+            const pagesContainer = document.getElementById(`pages-${dayId}`);
+            
+            let pagesHTML = '';
+            day.pages.forEach((page, pageIndex) => {
+                pagesHTML += `
+                    <div class="nav-page" data-day="${dayId}" data-page="${pageIndex}" onclick="loadPage('${dayId}', ${pageIndex})">
+                        ${page.type === 'theory' ? '📖' : '💻'} ${page.title}
+                    </div>
+                `;
+            });
+            
+            pagesContainer.innerHTML = pagesHTML;
+        }
+
+        // Toggle Day Expansion
+        async function toggleDay(dayId) {
+            const pagesDiv = document.getElementById(`pages-${dayId}`);
+            const button = document.querySelector(`.nav-day-button[data-day="${dayId}"]`);
+            
+            // Load day data if not loaded
+            if (!dayData[dayId]) {
+                await renderDayPages(dayId);
+            }
+            
+            // Close all other days
+            document.querySelectorAll('.nav-pages').forEach(pages => {
+                if (pages.id !== `pages-${dayId}`) {
+                    pages.classList.remove('expanded');
+                }
+            });
+            
+            document.querySelectorAll('.nav-day-button').forEach(btn => {
+                if (btn.dataset.day !== dayId) {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Toggle current day
+            pagesDiv.classList.toggle('expanded');
+            button.classList.toggle('active');
+        }
+
+        // Apply Highlighting to Content
+        function applyHighlights(content) {
+            if (!curriculumIndex.highlights) return content;
+            
+            let highlightedContent = content;
+            curriculumIndex.highlights.forEach(highlight => {
+                const regex = new RegExp(`\\b${highlight.term}\\b`, 'gi');
+                highlightedContent = highlightedContent.replace(regex, match => {
+                    return `<span style="color:${highlight.color};font-weight:${highlight.weight}">${match}</span>`;
+                });
+            });
+            
+            return highlightedContent;
+        }
+
+        // Load Page Content
+        async function loadPage(dayId, pageIndex) {
+            currentDay = dayId;
+            currentPage = pageIndex;
+            
+            // Load day data if not loaded
+            await loadDayData(dayId);
+            
+            const day = dayData[dayId];
+            const page = day.pages[pageIndex];
+            
+            // Update active states
+            document.querySelectorAll('.nav-page').forEach(p => p.classList.remove('active'));
+            const activeNav = document.querySelector(`[data-day="${dayId}"][data-page="${pageIndex}"]`);
+            if (activeNav) activeNav.classList.add('active');
+            
+            // Update content
+            const contentArea = document.getElementById('contentArea');
+            const dayNum = curriculumIndex.days.findIndex(d => d.id === dayId) + 1;
+            
+            // Apply highlighting to content
+            const highlightedContent = applyHighlights(page.content);
+            
+            contentArea.innerHTML = `
+                <div class="content-header">
+                    <div class="breadcrumb">Week 1 / Day ${dayNum} / Page ${pageIndex + 1}</div>
+                    <h1 class="content-title">${page.title}</h1>
+                    <div class="content-meta">
+                        <div class="meta-item">
+                            <span>${page.type === 'theory' ? '📖 Theory' : '💻 Practical'}</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>⏱️ ${page.duration}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-body">
+                    ${highlightedContent}
+                </div>
+            `;
+            
+            updateNavigationButtons();
+            window.scrollTo(0, 0);
+        }
+
+        // Update Navigation Buttons
+        function updateNavigationButtons() {
+            const prevBtn = document.getElementById('prevPage');
+            const nextBtn = document.getElementById('nextPage');
+            
+            const days = curriculumIndex.days.map(d => d.id);
+            const currentDayIndex = days.indexOf(currentDay);
+            const totalPagesInDay = dayData[currentDay].pages.length;
+            
+            if (currentPage === 0 && currentDayIndex === 0) {
+                prevBtn.classList.add('disabled');
+            } else {
+                prevBtn.classList.remove('disabled');
+            }
+            
+            if (currentPage === totalPagesInDay - 1 && currentDayIndex === days.length - 1) {
+                nextBtn.classList.add('disabled');
+            } else {
+                nextBtn.classList.remove('disabled');
+            }
+        }
+
+        // Navigate to Previous Page
+        async function navigatePrev() {
+            if (currentPage > 0) {
+                await loadPage(currentDay, currentPage - 1);
+            } else {
+                const days = curriculumIndex.days.map(d => d.id);
+                const currentDayIndex = days.indexOf(currentDay);
+                if (currentDayIndex > 0) {
+                    const prevDay = days[currentDayIndex - 1];
+                    await loadDayData(prevDay);
+                    const lastPageIndex = dayData[prevDay].pages.length - 1;
+                    await loadPage(prevDay, lastPageIndex);
+                }
+            }
+        }
+
+        // Navigate to Next Page
+        async function navigateNext() {
+            const totalPagesInDay = dayData[currentDay].pages.length;
+            if (currentPage < totalPagesInDay - 1) {
+                await loadPage(currentDay, currentPage + 1);
+            } else {
+                const days = curriculumIndex.days.map(d => d.id);
+                const currentDayIndex = days.indexOf(currentDay);
+                if (currentDayIndex < days.length - 1) {
+                    const nextDay = days[currentDayIndex + 1];
+                    await loadDayData(nextDay);
+                    await loadPage(nextDay, 0);
+                }
+            }
+        }
+
+        // Toggle Theme
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            document.documentElement.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+            document.getElementById('themeIcon').textContent = isDarkMode ? '☀️' : '🌙';
+            document.getElementById('themeText').textContent = isDarkMode ? 'Light' : 'Dark';
+        }
+
+        // Export Full Curriculum to PDF
+        async function exportFullCurriculum() {
+            // Check if html2pdf is loaded
+            if (typeof html2pdf === 'undefined') {
+                alert('❌ PDF library not loaded. Please refresh the page and try again.');
+                return;
+            }
+
+            // Show loading message
+            const exportBtn = document.getElementById('exportBtn');
+            const originalText = exportBtn.innerHTML;
+            exportBtn.innerHTML = '<span>⏳</span> Generating PDF...';
+            exportBtn.disabled = true;
+
+            try {
+                // Load all day data
+                const allDays = [];
+                for (const dayInfo of curriculumIndex.days) {
+                    if (!dayData[dayInfo.id]) {
+                        await loadDayData(dayInfo.id);
+                    }
+                    allDays.push({
+                        info: dayInfo,
+                        data: dayData[dayInfo.id]
+                    });
+                }
+
+                console.log('Loaded days:', allDays.length);
+
+                // Build complete HTML structure
+                let fullHTML = `
+                    <div style="font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px;">
+                        <!-- Cover Page -->
+                        <div style="page-break-after: always; text-align: center; padding: 100px 20px;">
+                            <h1 style="font-size: 48px; color: #3b82f6; margin-bottom: 20px;">
+                                ${curriculumIndex.title}
+                            </h1>
+                            <p style="font-size: 24px; color: #64748b; margin-bottom: 40px;">
+                                ${curriculumIndex.description}
+                            </p>
+                            <p style="font-size: 18px; color: #94a3b8;">
+                                Generated on ${new Date().toLocaleDateString()}
+                            </p>
+                        </div>
+
+                        <!-- Table of Contents -->
+                        <div style="page-break-after: always; padding: 40px 20px;">
+                            <h2 style="font-size: 36px; color: #0f172a; margin-bottom: 30px; border-bottom: 3px solid #3b82f6; padding-bottom: 10px;">
+                                Table of Contents
+                            </h2>
+                            ${allDays.map((day, dayIndex) => `
+                                <div style="margin-bottom: 30px;">
+                                    <h3 style="font-size: 24px; color: #3b82f6; margin-bottom: 15px;">
+                                        Day ${dayIndex + 1}: ${day.info.title}
+                                    </h3>
+                                    <p style="color: #64748b; margin-bottom: 10px;">
+                                        ${day.info.summary}
+                                    </p>
+                                    <ul style="list-style: none; padding-left: 0;">
+                                        ${day.data.pages.map((page, pageIndex) => `
+                                            <li style="padding: 5px 0; color: #475569;">
+                                                ${pageIndex + 1}. ${page.title} 
+                                                <span style="color: #94a3b8;">(${page.duration})</span>
+                                            </li>
+                                        `).join('')}
+                                    </ul>
+                                </div>
+                            `).join('')}
+                        </div>
+
+                        <!-- All Days Content -->
+                        ${allDays.map((day, dayIndex) => `
+                            <!-- Day ${dayIndex + 1} Start -->
+                            <div style="page-break-before: always; padding: 20px;">
+                                <div style="background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); 
+                                            color: white; padding: 30px; border-radius: 10px; margin-bottom: 40px;">
+                                    <h1 style="font-size: 36px; margin: 0 0 10px 0;">
+                                        Day ${dayIndex + 1}
+                                    </h1>
+                                    <h2 style="font-size: 28px; margin: 0 0 15px 0; font-weight: normal;">
+                                        ${day.info.title}
+                                    </h2>
+                                    <p style="font-size: 16px; margin: 0; opacity: 0.9;">
+                                        ${day.info.summary}
+                                    </p>
+                                </div>
+
+                                <!-- All Pages for this Day -->
+                                ${day.data.pages.map((page, pageIndex) => `
+                                    <div style="page-break-before: ${pageIndex > 0 ? 'always' : 'auto'}; 
+                                                padding: 20px 0; margin-bottom: 40px;">
+                                        <!-- Page Header -->
+                                        <div style="border-left: 4px solid #3b82f6; padding-left: 20px; margin-bottom: 30px;">
+                                            <div style="color: #64748b; font-size: 14px; margin-bottom: 5px;">
+                                                Day ${dayIndex + 1} → Page ${pageIndex + 1} of ${day.data.pages.length}
+                                            </div>
+                                            <h2 style="font-size: 32px; color: #0f172a; margin: 0 0 10px 0;">
+                                                ${page.title}
+                                            </h2>
+                                            <div style="display: flex; gap: 20px; font-size: 14px; color: #64748b;">
+                                                <span>${page.type === 'theory' ? '📖 Theory' : '💻 Practical'}</span>
+                                                <span>⏱️ ${page.duration}</span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Page Content -->
+                                        <div style="line-height: 1.8; color: #334155;">
+                                            ${applyHighlights(page.content)}
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <!-- Day ${dayIndex + 1} End -->
+                        `).join('')}
+
+                        <!-- Back Cover -->
+                        <div style="page-break-before: always; text-align: center; padding: 100px 20px;">
+                            <h2 style="font-size: 36px; color: #3b82f6; margin-bottom: 20px;">
+                                🎉 Congratulations!
+                            </h2>
+                            <p style="font-size: 20px; color: #64748b; line-height: 1.6;">
+                                You've completed Week 1 of the AI Engineering Bootcamp!
+                            </p>
+                            <p style="font-size: 16px; color: #94a3b8; margin-top: 40px;">
+                                Built with AI Tools: ChatGPT • Cursor • Claude • V0
+                            </p>
+                        </div>
+                    </div>
+                `;
+
+                // Create temporary container - make it VISIBLE for testing
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = fullHTML;
+                tempDiv.style.position = 'relative'; // Make visible
+                tempDiv.style.width = '210mm'; // A4 width
+                tempDiv.style.background = 'white';
+                tempDiv.style.padding = '20px';
+                tempDiv.style.margin = '0 auto';
+                
+                // Hide main content temporarily
+                const mainContent = document.querySelector('.app-container');
+                mainContent.style.display = 'none';
+                
+                document.body.appendChild(tempDiv);
+
+                console.log('Content length:', fullHTML.length);
+                console.log('Temp div children:', tempDiv.children.length);
+
+                // Wait for DOM to fully render
+                await new Promise(resolve => setTimeout(resolve, 1000));
+
+                // Generate PDF using html2pdf with optimized settings
+                const opt = {
+                    margin: [10, 10, 10, 10],
+                    filename: 'AI-Engineering-Bootcamp-Week1-Full-Curriculum.pdf',
+                    image: { 
+                        type: 'jpeg', 
+                        quality: 0.95 
+                    },
+                    html2canvas: { 
+                        scale: 1.5, // Reduced scale for performance
+                        useCORS: true,
+                        logging: false,
+                        windowWidth: 800,
+                        windowHeight: 1200
+                    },
+                    jsPDF: { 
+                        unit: 'mm', 
+                        format: 'a4', 
+                        orientation: 'portrait',
+                        compress: true
+                    },
+                    pagebreak: { 
+                        mode: ['avoid-all', 'css', 'legacy']
+                    }
+                };
+
+                console.log('Starting PDF generation...');
+                
+                try {
+                    const worker = html2pdf().set(opt).from(tempDiv);
+                    await worker.save();
+                    console.log('PDF generation complete!');
+                } catch (pdfError) {
+                    console.error('PDF generation failed:', pdfError);
+                    throw pdfError;
+                }
+
+                // Cleanup
+                document.body.removeChild(tempDiv);
+                mainContent.style.display = 'flex';
+
+                // Reset button
+                exportBtn.innerHTML = originalText;
+                exportBtn.disabled = false;
+
+                alert('✅ PDF generated successfully!');
+
+            } catch (error) {
+                console.error('PDF generation error:', error);
+                alert('❌ Error generating PDF: ' + error.message);
+                exportBtn.innerHTML = originalText;
+                exportBtn.disabled = false;
+            }
+        }
+
+        // Export Current Page to PDF
+        async function exportCurrentPage() {
+            if (typeof html2pdf === 'undefined') {
+                alert('❌ PDF library not loaded. Please refresh the page.');
+                return;
+            }
+
+            const exportBtn = document.getElementById('exportBtn');
+            const originalText = exportBtn.innerHTML;
+            exportBtn.innerHTML = '<span>⏳</span> Generating PDF...';
+            exportBtn.disabled = true;
+
+            try {
+                const contentArea = document.getElementById('contentArea');
+                const dayNum = curriculumIndex.days.findIndex(d => d.id === currentDay) + 1;
+                
+                const opt = {
+                    margin: 15,
+                    filename: `Day${dayNum}-Page${currentPage + 1}.pdf`,
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                };
+
+                await html2pdf().from(contentArea).set(opt).save();
+                alert('✅ Current page exported!');
+
+            } catch (error) {
+                console.error('PDF error:', error);
+                alert('❌ Error: ' + error.message);
+            } finally {
+                exportBtn.innerHTML = originalText;
+                exportBtn.disabled = false;
+            }
+        }
+
+        // Export Day-by-Day (Alternative Approach)
+        async function exportDayByDay() {
+            const exportBtn = document.getElementById('exportBtn');
+            const originalText = exportBtn.innerHTML;
+
+            try {
+                for (let i = 0; i < curriculumIndex.days.length; i++) {
+                    const dayInfo = curriculumIndex.days[i];
+                    exportBtn.innerHTML = `<span>⏳</span> Day ${i + 1}/5...`;
+                    
+                    if (!dayData[dayInfo.id]) {
+                        await loadDayData(dayInfo.id);
+                    }
+                    
+                    const day = dayData[dayInfo.id];
+                    
+                    // Build HTML for this day only
+                    let dayHTML = `
+                        <div style="font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px;">
+                            <div style="background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); 
+                                        color: white; padding: 30px; border-radius: 10px; margin-bottom: 40px;">
+                                <h1 style="font-size: 36px; margin: 0 0 10px 0;">Day ${i + 1}</h1>
+                                <h2 style="font-size: 28px; margin: 0 0 15px 0; font-weight: normal;">${dayInfo.title}</h2>
+                                <p style="font-size: 16px; margin: 0;">${dayInfo.summary}</p>
+                            </div>
+                            ${day.pages.map((page, pageIndex) => `
+                                <div style="page-break-before: ${pageIndex > 0 ? 'always' : 'auto'}; padding: 20px 0; margin-bottom: 40px;">
+                                    <div style="border-left: 4px solid #3b82f6; padding-left: 20px; margin-bottom: 30px;">
+                                        <h2 style="font-size: 32px; color: #0f172a; margin: 0 0 10px 0;">${page.title}</h2>
+                                        <div style="font-size: 14px; color: #64748b;">
+                                            ${page.type === 'theory' ? '📖 Theory' : '💻 Practical'} • ${page.duration}
+                                        </div>
+                                    </div>
+                                    <div style="line-height: 1.8; color: #334155;">${applyHighlights(page.content)}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                    
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = dayHTML;
+                    tempDiv.style.position = 'relative';
+                    tempDiv.style.width = '210mm';
+                    tempDiv.style.background = 'white';
+                    tempDiv.style.padding = '20px';
+                    document.body.appendChild(tempDiv);
+                    
+                    await new Promise(resolve => setTimeout(resolve, 500));
+                    
+                    const opt = {
+                        margin: 10,
+                        filename: `Day${i + 1}-${dayInfo.title.replace(/[^a-z0-9]/gi, '-')}.pdf`,
+                        image: { type: 'jpeg', quality: 0.95 },
+                        html2canvas: { scale: 1.5 },
+                        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                    };
+                    
+                    await html2pdf().from(tempDiv).set(opt).save();
+                    document.body.removeChild(tempDiv);
+                    
+                    // Small delay between days
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                }
+                
+                alert('✅ All 5 days exported as separate PDFs!');
+                
+            } catch (error) {
+                console.error('Export error:', error);
+                alert('❌ Error: ' + error.message);
+            } finally {
+                exportBtn.innerHTML = originalText;
+                exportBtn.disabled = false;
+            }
+        }
+
+        // Export to PDF
+        function exportToPDF() {
+            if (typeof html2pdf === 'undefined') {
+                alert('❌ PDF library not loaded. Please refresh the page.');
+                return;
+            }
+
+            const options = prompt(
+                'Choose export option:\n\n' +
+                '1 = Current Page Only\n' +
+                '2 = Full Curriculum (Single PDF - may take time)\n' +
+                '3 = Day-by-Day (5 separate PDFs - recommended)\n\n' +
+                'Enter 1, 2, or 3:'
+            );
+            
+            if (options === '1') {
+                exportCurrentPage();
+            } else if (options === '2') {
+                exportFullCurriculum();
+            } else if (options === '3') {
+                exportDayByDay();
+            } else if (options !== null) {
+                alert('Invalid option. Please try again.');
+            }
+        }
+
+        // Mobile Menu Functions
+        function toggleMobileMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+
+        function closeMobileMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+        }
+
+        // Setup Event Listeners
+        function setupEventListeners() {
+            document.getElementById('prevPage').addEventListener('click', navigatePrev);
+            document.getElementById('nextPage').addEventListener('click', navigateNext);
+            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+            document.getElementById('exportBtn').addEventListener('click', exportToPDF);
+            
+            // Mobile menu
+            document.getElementById('mobileMenuToggle').addEventListener('click', toggleMobileMenu);
+            document.getElementById('sidebarOverlay').addEventListener('click', closeMobileMenu);
+            
+            // Close mobile menu when clicking a page link
+            document.addEventListener('click', (e) => {
+                if (e.target.classList.contains('nav-page')) {
+                    closeMobileMenu();
+                }
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') navigatePrev();
+                if (e.key === 'ArrowRight') navigateNext();
+                if (e.key === 'Escape') closeMobileMenu();
+            });
+        }
+
+        // Initialize on load
+        init();
+    </script>
+</body>
+</html>

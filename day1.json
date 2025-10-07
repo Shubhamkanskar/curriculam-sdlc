@@ -1,0 +1,59 @@
+{
+  "title": "Day 1 — Kickoff + AI Mindset",
+  "pages": [
+    {
+      "title": "Page 1: Welcome to the World of AI Engineers",
+      "type": "theory",
+      "duration": "20 min",
+      "content": "<h2>Mentor Opening</h2><p>Say with energy: “Welcome to Day 1 — where you stop being a regular developer and start thinking like an AI Engineer.”</p><p>Explain that an <strong>AI Engineer</strong> is someone who doesn’t write every line of code manually — instead, they orchestrate AI tools to build software 10x faster.</p><h3>Key Idea</h3><ul><li>Traditional developers write syntax; AI Engineers write <em>instructions</em>.</li><li>They use AI copilots, design generators, and assistants to build complete systems.</li><li>Their focus is no longer ‘how to code’, but ‘what to build and why.’</li></ul><h3>Class Discussion</h3><p>Ask students: “If AI can write code, what’s your job now?” Let them brainstorm. Then reveal:</p><div class='info-box'><p><strong>Answer:</strong> Your job is to direct AI clearly — to guide it, refine its output, and ship the final product.</p></div><h3>Activity</h3><p>Have everyone write one line in their notebook: “I am not replacing coding — I’m multiplying it.”</p><p>Say: “That’s your new identity as an AI Engineer.”</p>"
+    },
+    {
+      "title": "Page 2: Understanding the AI-Accelerated SDLC",
+      "type": "theory",
+      "duration": "20 min",
+      "content": "<h2>Mentor Overview</h2><p>Say: “Every software project follows a lifecycle — from idea to deployment. Let’s see how AI changes each step.”</p><h3>The Traditional SDLC</h3><ol><li>Requirements gathering (slow meetings, documents)</li><li>Design (manual wireframes)</li><li>Development (writing thousands of lines manually)</li><li>Testing (manual debugging)</li><li>Deployment (scripts, setup)</li></ol><h3>The AI-Powered SDLC</h3><ul><li>ChatGPT generates product ideas and PRDs.</li><li>V0 creates UI layouts in minutes.</li><li>Cursor writes and refactors your code in your IDE.</li><li>Claude explains, optimizes, and debugs large files.</li><li>Vercel/Railway deploy projects instantly.</li></ul><h3>Mentor Quote</h3><p>“What took 3 months before, now takes 3 days. The AI Engineer isn’t faster — they’re <strong>amplified</strong>.”</p><h3>Student Task</h3><p>Ask them to draw a quick 5-step flow in their notes: <em>Idea → Design → Build → Test → Deploy</em>, and note which AI tool fits where.</p><div class='info-box'><p><strong>Key Outcome:</strong> Understand how AI integrates into every stage of the software lifecycle.</p></div>"
+    },
+    {
+      "title": "Page 3: AI Tools Overview — Your New Toolkit",
+      "type": "theory",
+      "duration": "20 min",
+      "content": "<h2>Mentor Introduction</h2><p>Say: “Let’s meet your new teammates — not people, but tools.”</p><h3>The AI Engineer’s Toolkit</h3><table><tr><th>Tool</th><th>Purpose</th><th>SDLC Phase</th></tr><tr><td>ChatGPT</td><td>Idea generation, PRDs, writing docs</td><td>Plan</td></tr><tr><td>Claude</td><td>Debugging, analysis, long-context reasoning</td><td>Test</td></tr><tr><td>Cursor</td><td>AI-powered coding inside IDE</td><td>Build</td></tr><tr><td>V0</td><td>AI UI generator for React</td><td>Design</td></tr><tr><td>GitHub + LinkedIn</td><td>Portfolio & career presence</td><td>Deploy / Showcase</td></tr></table><h3>Mentor Demo</h3><p>Show Cursor AI in action: type a comment <code>// create a login component</code> and watch AI generate the code.</p><h3>Student Reflection</h3><p>Ask: “Which of these tools do you think will save you the most time?”</p><div class='info-box'><p><strong>Tip:</strong> By the end of this week, students will have used every tool in this table.</p></div>"
+    },
+    {
+      "title": "Page 4: Setting Up Cursor IDE",
+      "type": "practical",
+      "duration": "40 min",
+      "content": "<h2>Mentor Setup</h2><p>Say: “Now it’s time to set up your AI workspace — Cursor IDE.”</p><h3>Setup Steps</h3><ol><li>Go to <a href='https://cursor.sh'>cursor.sh</a> and download Cursor.</li><li>Install and open it.</li><li>Sign in with your GitHub account.</li><li>In settings, enable:<br>- AI Autocomplete<br>- Inline Chat<br>- Context Awareness</li></ol><h3>Test the Setup</h3><div class='code-block'><code>// Type this in a new file:<br>// Create a function that checks if a number is prime<br><br>function isPrime(n) {<br>  if (n < 2) return false;<br>  for (let i = 2; i <= Math.sqrt(n); i++) {<br>    if (n % i === 0) return false;<br>  }<br>  return true;<br>}</code></div><p>If Cursor autocompletes your function — you’re ready!</p><div class='info-box'><p><strong>Deliverable:</strong> Working Cursor IDE installed and verified.</p></div>"
+    },
+    {
+      "title": "Page 5: Setting Up GitHub and LinkedIn Profiles",
+      "type": "practical",
+      "duration": "40 min",
+      "content": "<h2>Mentor Setup</h2><p>Say: “We build in public. GitHub shows your code; LinkedIn shows your growth.”</p><h3>GitHub</h3><ol><li>Sign up at <a href='https://github.com'>github.com</a>.</li><li>Set profile photo + bio: <em>Aspiring AI Engineer | Building 10x faster with AI tools</em>.</li><li>Create your first repo: <code>day1-hello-ai-engineer</code>.</li></ol><h3>LinkedIn</h3><ol><li>Update headline: “AI Engineer in Training | Building with ChatGPT, Cursor & V0.”</li><li>Write your About section using this prompt:</li></ol><div class='code-block'><code>Write a short LinkedIn about section for an aspiring AI Engineer who loves learning by building with ChatGPT and Cursor. Keep it confident and human.</code></div><p>Review AI output together and let them refine it.</p><div class='info-box'><p><strong>Deliverable:</strong> GitHub + LinkedIn profiles complete.</p></div>"
+    },
+    {
+      "title": "Page 6: Generate Your First Project",
+      "type": "practical",
+      "duration": "40 min",
+      "content": "<h2>Mentor Task</h2><p>Say: “Time to build your very first project — entirely with AI.”</p><h3>Prompt to Use in ChatGPT</h3><div class='code-block'><code>Create a complete Next.js 14 app called 'Hello AI Engineer'.<br>- Animated gradient background<br>- Heading: 'Hello AI Engineer'<br>- Subheading: 'Building 10x faster with AI'<br>- Button: 'Generate Quote' (shows random AI quote)<br>- Tailwind CSS + TypeScript + Responsive</code></div><h3>Steps</h3><ol><li>Copy AI output into your folder <code>day1-hello-ai-engineer</code>.</li><li>Run <code>npm install</code> → <code>npm run dev</code>.</li><li>View your app at <code>localhost:3000</code>.</li></ol><h3>Mentor Tip</h3><p>Show them how to tweak prompts: “Add a fade-in animation” → “Make it gradient purple to blue.”</p><div class='info-box'><p><strong>Deliverable:</strong> Functional app running locally.</p></div>"
+    },
+    {
+      "title": "Page 7: Test & Debug with AI",
+      "type": "practical",
+      "duration": "40 min",
+      "content": "<h2>Mentor Lesson</h2><p>Say: “Even AI-generated code breaks sometimes. The skill is knowing how to debug <em>with</em> AI.”</p><h3>Common Issues</h3><ul><li>❌ Styles not applying → check Tailwind config</li><li>❌ App crashes → missing import</li><li>❌ Quotes not randomizing → wrong array index</li></ul><h3>Debug Prompt Example</h3><div class='code-block'><code>My Next.js app crashes on load with error: Cannot read properties of undefined. Here’s my code: [paste]. What’s wrong and how do I fix it?</code></div><p>AI should reply with detailed explanation — walk them through one example fix.</p><h3>Student Exercise</h3><p>Introduce 1 small bug intentionally, fix it using ChatGPT or Cursor.</p><div class='info-box'><p><strong>Deliverable:</strong> Debugged app that runs perfectly.</p></div>"
+    },
+    {
+      "title": "Page 8: Push to GitHub",
+      "type": "practical",
+      "duration": "40 min",
+      "content": "<h2>Mentor Setup</h2><p>Say: “Let’s put your first project live on GitHub — your public coding identity.”</p><h3>Commands</h3><div class='code-block'><code>git init<br>git add .<br>git commit -m \"feat: first AI Engineer project\"<br>git branch -M main<br>git remote add origin https://github.com/yourname/day1-hello-ai-engineer.git<br>git push -u origin main</code></div><p>Confirm students can view their project online.</p><h3>Mentor Tip</h3><p>Remind: “You don’t need perfection — you need visibility.”</p><div class='info-box'><p><strong>Deliverable:</strong> Code live on GitHub with README.md</p></div>"
+    },
+    {
+      "title": "Page 9: Share Your First LinkedIn Post",
+      "type": "practical",
+      "duration": "40 min",
+      "content": "<h2>Mentor Closing</h2><p>Say with pride: “You’re now officially in public. Let’s tell the world.”</p><h3>Post Template</h3><div class='code-block'><code>🚀 Day 1 of my AI Engineer journey<br><br>✅ Installed Cursor IDE<br>✅ Built first app with ChatGPT<br>✅ Pushed project to GitHub<br><br>Learning: AI doesn't replace coding — it amplifies it.<br><br>Check my project 👇<br>🔗 GitHub: [link]<br>#AIEngineering #WebDevelopment #LearnInPublic</code></div><h3>Activity</h3><ol><li>Each student posts their project using the template.</li><li>Tag their classmates and the mentor.</li></ol><p>Celebrate with a few claps or a selfie moment 🎉</p><div class='info-box'><p><strong>Deliverable:</strong> LinkedIn post shared publicly with project link.</p></div>"
+    }
+  ]
+}

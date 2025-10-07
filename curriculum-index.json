@@ -1,0 +1,49 @@
+{
+  "week": 1,
+  "title": "AI Engineering Bootcamp - Week 1",
+  "description": "Master the fundamentals of AI-accelerated development",
+  "days": [
+    {
+      "id": "day1",
+      "file": "day1.json",
+      "title": "Kickoff + AI Mindset",
+      "summary": "Learn what an AI Engineer is, understand the AI-accelerated SDLC, and set up your development environment"
+    },
+    {
+      "id": "day2",
+      "file": "day2.json",
+      "title": "AI Tools & Prompt Engineering",
+      "summary": "Master AI copilots, learn prompt engineering patterns, and build your first AI-generated component"
+    },
+    {
+      "id": "day3",
+      "file": "day3.json",
+      "title": "Planning & Requirements",
+      "summary": "Create PRDs with AI, break down ideas into tasks, and plan your MVP using AI-assisted planning"
+    },
+    {
+      "id": "day4",
+      "file": "day4.json",
+      "title": "Design & Implementation",
+      "summary": "Build frontend architecture, use AI for design, create components, and deploy preview builds"
+    },
+    {
+      "id": "day5",
+      "file": "day5.json",
+      "title": "Deployment & Reflection",
+      "summary": "Deploy to production, set up CI/CD, document your work, and celebrate your achievements"
+    }
+  ],
+  "highlights": [
+    {
+      "term": "AI Engineer",
+      "color": "#3b82f6",
+      "weight": "700"
+    },
+    {
+      "term": "SDLC",
+      "color": "#10b981",
+      "weight": "700"
+    }
+  ]
+}
